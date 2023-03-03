@@ -32,7 +32,7 @@ function App() {
 
 function GroupList(props) {
   return (
-    <div className='container'>
+    <div className='Maincontainer'>
       <div className='group-list-container'>
         <span className='title'>Select Group</span>
         {props.groupList.map((elm, index) => <div onClick={() => props.setGroup(elm)} className='group-list' key={index}>{elm}</div>)}
