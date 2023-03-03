@@ -1,9 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import check from "./checkmark.png";
+import cancel from "./cancel.png";
+import pend from "./pending-icon.png";
+
+
 const initialGroupState = {
   id: 1,
   name: "Burgandy boyzz",
-  members: [{ name: "Sanket", contact: "", action: "" }, { name: "Sudhanshu", contact: "", action: "" }, { name: "Arun", contact: "", action: "" }]
+  members: [{ name: "Sanket", contact: "", action: "yes" }, { name: "Sudhanshu", contact: "", action: "" }, { name: "Arun", contact: "", action: "" }]
 }
 
 const monthList = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -18,10 +23,12 @@ function App() {
   }
   return (
     <div className="App">
-      {group ? <GroupView group={group} /> : <GroupList setGroup={updateGroup} groupList={groupList} />}
+      {group ? <GroupView resetGrp={updateGroup} group={group} /> : <GroupList setGroup={updateGroup} groupList={groupList} />}
     </div>
   );
 }
+
+
 
 function GroupList(props) {
   return (
@@ -44,6 +51,8 @@ function GroupView(props) {
   let endDate = new Date();
   const [weekDays, setWeekDays] = useState([]);
   const [task, setTask] = useState("");
+  const [members, setMembers] = useState([]);
+
 
   let getWeekDays = () => {
     let tempDays = [];
@@ -51,7 +60,8 @@ function GroupView(props) {
       date: startDate,
       day: "Mon",
       task: "Yessss",
-      selected: false
+      selected: false,
+      members: [{ name: "Sanket", contact: "", action: "yes" }, { name: "Sudhanshu", contact: "", action: "" }, { name: "Arun", contact: "", action: "" }]
     });
 
     for (let i = 0; i < DayList.length; i++) {
@@ -61,8 +71,9 @@ function GroupView(props) {
         tempDays.push({
           date: initDate,
           day: DayList[initDate.getDay()],
-          task: "Tesing"+i,
-          selected: false
+          task: "Tesing" + i,
+          selected: false,
+          members: [{ name: "Sanket", contact: "", action: "yes" }, { name: "Sudhanshu", contact: "", action: "" }, { name: "Arun", contact: "", action: "" }]
         })
       }
     }
@@ -92,7 +103,7 @@ function GroupView(props) {
     }
 
     if (weekDays[index].selected) {
-      style += ' dateTileAf'
+      style += ' dateTileAf dateSelected'
     }
 
 
@@ -102,15 +113,23 @@ function GroupView(props) {
 
   const getTask = (index) => {
     let temp = weekDays;
-    temp.forEach(elm=>elm.selected =false);
-    temp[index].selected = true;    
+    temp.forEach(elm => elm.selected = false);
+    temp[index].selected = true;
     setTask(weekDays[index].task);
     setWeekDays(temp);
+    let newMemb = Object.assign([], temp[index].members);
+    setMembers(newMemb);
+  }
+
+  const setAction = (index) => {
+    let temp = Object.assign([], members);
+    temp[index].action = !temp[index].action ? "yes" : (temp[index].action == "yes" ? "no" : "yes");
+    setMembers(temp);
   }
 
   return (
     <div className='container'>
-      <span className='title'>{props.group}</span>
+      <span onClick={()=>props.resetGrp(null)} className='title br-5'>{props.group}</span>
       <div className='calenderViewContainer'>
         <div className='titleWeek'>
           <span>{getCurrentWeek()}</span>
@@ -127,13 +146,25 @@ function GroupView(props) {
                 )
               })
             }
-            {task ? <div className='task'>{task}</div> : null}
+            {task ? <div className='task'><span>{task}</span></div> : null}
           </div>
+          {task ?
+            <div className='members'>
+              {
+                members.map((elm, index) => {
+                  return (
+                    <div key={index} onClick={() => { setAction(index) }} className="member-list"><span>{elm.name}</span> {elm.action == "yes" ? <img src={check} /> : (elm.action == "no" ? <img src={cancel} /> : <img src={pend} />)} </div>
+                  )
+                })
+              }
+            </div>
+            : null}
         </div>
 
       </div>
     </div>
   );
 }
+
 
 export default App;

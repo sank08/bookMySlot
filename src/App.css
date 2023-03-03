@@ -25,6 +25,7 @@
   right: 0;
   margin: auto;
   text-align: center;
+  animation: zoom-list 1s;
 }
 
 .group-list {
@@ -51,22 +52,30 @@ body {
 }
 
 .title {
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 40px;
+  font-weight: 700;
   position: relative;
   display: block;
   bottom: 20px;
+  font-family: math;
+  text-transform: capitalize;
+}
+
+.br-5{
+  bottom: 5rem;
 }
 
 .calenderViewContainer {
   width: 50rem;
-  height: 30rem;
+  height: 100%;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
+  animation: calender-zoom 1s;
+  animation-timing-function: ease-in-out;
 }
 
 .titleWeek {
@@ -88,6 +97,8 @@ body {
   width: 100%;
   border-radius: 5px;
   position: relative;
+  overflow: hidden;
+  background: #fbfafa;
 }
 
 .dateTile {
@@ -99,6 +110,15 @@ body {
   align-items: center;
   text-align: center;
   cursor: pointer;
+}
+
+.dateSelected {
+  color: white;
+  background-color: darkblue;
+}
+
+.dateSelected>.dt {
+  color: white;
 }
 
 .b-r-0 {
@@ -122,6 +142,9 @@ body {
   left: 1rem;
   min-height: 100px;
   max-height: 200px;
+  background-color: white;
+  padding: 1rem;
+  word-wrap: break-word;
 }
 
 .dateTileAf:after {
@@ -136,4 +159,79 @@ body {
   left: 50px;
   z-index: 1;
 
+}
+
+@keyframes zoom-list {
+
+  0% {
+    width: 0;
+    height: 0;
+    top: 0;
+  }
+
+  100% {
+    width: 30rem;
+    height: 30rem;
+  }
+
+}
+
+@keyframes calender-zoom {
+
+  0% {
+    width: 0;
+    height: 0;
+    top: 0;
+  }
+
+  20% {
+    width: 100px;
+    height: 10%;
+    transform: rotate(90deg);
+  }
+
+  50% {
+    width: 250px;
+    height: 40%;
+    transform: rotate(180deg);
+  }
+
+  80% {
+    width: 400px;
+    height: 80%;
+    transform: rotate(270deg);
+  }
+
+  100% {
+    height: 500px;
+    width: 100%;
+    transform: rotate(360deg);
+  }
+
+}
+
+.members {
+  position: relative;
+  top: 12rem;
+  height: auto;
+  padding: 1rem;
+}
+
+.member-list {
+  height: 50px;
+  width: 500px;
+  box-shadow: 1px 1px 5px 2px darkgrey;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.member-list>img {
+  height: 30px;
+  position: absolute;
+  right: 10px;
 }
