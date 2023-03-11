@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/bookMySlot/static/css/main.8608fc8d.css",
-    "main.js": "/bookMySlot/static/js/main.833ed6d2.js",
+    "main.js": "/bookMySlot/static/js/main.da42c0ff.js",
     "static/js/27.61cbde44.chunk.js": "/bookMySlot/static/js/27.61cbde44.chunk.js",
     "index.html": "/bookMySlot/index.html"
   },
   "entrypoints": [
     "static/css/main.8608fc8d.css",
-    "static/js/main.833ed6d2.js"
+    "static/js/main.da42c0ff.js"
   ]
 }
