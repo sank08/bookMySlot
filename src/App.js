@@ -16,7 +16,7 @@ const DayList = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
 
 function App() {
   const [group, setGroup] = useState();
-  const [groupList, setGroupList] = useState(["Burgandy boyzz", "Project Sourcecode"]);
+  const [groupList, setGroupList] = useState(["Sexy things","Burgandy boyzz", "Project Sourcecode"]);
 
   let updateGroup = (elm) => {
     setGroup(elm);
